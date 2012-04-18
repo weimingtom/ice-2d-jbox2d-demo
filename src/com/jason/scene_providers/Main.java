@@ -3,28 +3,25 @@ package com.jason.scene_providers;
 import android.util.Log;
 import android.view.MotionEvent;
 import com.jason.scenes.MainScene;
-import ice.engine.EngineContext;
 import ice.engine.Scene;
-import ice.engine.SceneProvider;
 import ice.node.Overlay;
 import ice.node.TouchEventListener;
 import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * User: jason
  * Date: 12-4-16
  * Time: 下午12:27
  */
-public class Main extends SceneProvider {
+public class Main extends Test {
 
     private static final String TAG = Main.class.getSimpleName();
-    public static final float MAX_WORLD_SIZE = 10.0f;
 
     @Override
     protected Scene onCreateScene() {
@@ -35,23 +32,6 @@ public class Main extends SceneProvider {
     protected void onCreate() {
         super.onCreate();
 
-        bodies = new CopyOnWriteArrayList<Body>();
-
-        int appWidth = EngineContext.getAppWidth();
-        int appHeight = EngineContext.getAppHeight();
-
-        aspect = (float) appWidth / appHeight;
-        scaleRate = MAX_WORLD_SIZE / Math.max(appWidth, appHeight);
-
-        if (appWidth > appHeight) {
-            maxWorldWidth = MAX_WORLD_SIZE;
-            maxWorldHeight = maxWorldWidth / aspect;
-        }
-        else {
-            maxWorldHeight = MAX_WORLD_SIZE;
-            maxWorldWidth = maxWorldHeight * aspect;
-        }
-
         scene.addEventListener(new TouchHandler());
     }
 
@@ -59,25 +39,7 @@ public class Main extends SceneProvider {
     protected void onResume() {
         super.onResume();
 
-        initWorld();
-
         initGround();
-
-        new SimulateThread().start();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        stop = true;
-    }
-
-    private void initWorld() {
-        boolean doSleep = true;
-        Vec2 gravity = new Vec2(0, -10f);
-
-        world = new World(gravity, doSleep);
     }
 
     private void initGround() {
@@ -105,71 +67,7 @@ public class Main extends SceneProvider {
         );
     }
 
-    private float maxWorldWidth;
-    private float maxWorldHeight;
-
-    private float scaleRate;
-    private float aspect;
-
-    private World world;
     private Body groundBody;
-    private List<Body> bodies;
-
-    private boolean stop;
-
-    private class SimulateThread extends Thread {
-        float step = 1 / 60f;
-        int velocityIterations = 10;
-        int positionIterations = 5;
-
-
-        @Override
-        public void run() {
-
-            while (!stop) {
-                step();
-
-                sleep();
-            }
-
-        }
-
-        private void sleep() {
-            try {
-                Thread.sleep((long) (step * 1000));
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private void step() {
-            world.step(step, velocityIterations, positionIterations);
-
-            for (Body body : bodies) {
-
-                Object userData = body.getUserData();
-
-                if (userData != null && userData instanceof Overlay) {
-
-                    Overlay overlay = (Overlay) userData;
-
-                    Vec2 pos = body.getPosition();
-                    float angle = body.getAngle();
-
-                    overlay.setPos(pos.x / scaleRate, pos.y / scaleRate);
-
-                    overlay.setRotate(
-                            (float) Math.toDegrees(angle),
-                            0,
-                            0,
-                            1
-                    );
-                }
-
-            }
-        }
-    }
 
     private class TouchHandler extends TouchEventListener {
         private Random random = new Random();
