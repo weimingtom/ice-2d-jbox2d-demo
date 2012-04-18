@@ -1,12 +1,14 @@
 package com.jason.scene_providers;
 
+import android.util.Log;
 import com.jason.NavigateGestureHandler;
+import com.jason.scenes.TestScene;
 import ice.engine.EngineContext;
 import ice.engine.SceneProvider;
 import ice.node.Overlay;
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.*;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,6 +28,7 @@ public abstract class Test extends SceneProvider {
 
     protected static float scaleRate;
     protected static float aspect;
+    private static final String TAG = Test.class.getSimpleName();
 
     @Override
     protected void onCreate() {
@@ -69,6 +72,26 @@ public abstract class Test extends SceneProvider {
         stop = true;
     }
 
+    public void initGround() {
+        float posX = maxWorldWidth / 2;
+        float posY = maxWorldHeight * 0.1f;
+
+        BodyDef groundBodyDef = new BodyDef();
+        groundBodyDef.position.set(posX, posY);
+
+        groundBody = world.createBody(groundBodyDef);
+
+        float groundWidth = maxWorldWidth;
+        float groundHeight = 1f;
+
+        PolygonShape groundBox = new PolygonShape();
+        groundBox.setAsBox(groundWidth / 2, groundHeight / 2);
+
+        groundBody.createFixture(groundBox, 0);
+
+        ((TestScene) scene).showBoxBody(groundBody, scaleRate);
+    }
+
     private void initWorld() {
         boolean doSleep = true;
         Vec2 gravity = new Vec2(0, -10f);
@@ -76,11 +99,47 @@ public abstract class Test extends SceneProvider {
         world = new World(gravity, doSleep);
     }
 
+    protected Body createBox(float x, float y, float width, float height) {
+        BodyDef boxBodyDef = new BodyDef();
+        boxBodyDef.type = BodyType.DYNAMIC;
+        boxBodyDef.position.set(x, y);
+
+        Body boxBody = world.createBody(boxBodyDef);
+
+        if (boxBody == null) {
+            Log.e(TAG, "Create body error ! ");
+            return null;
+        }
+
+        PolygonShape boxShape = new PolygonShape();
+        boxShape.setAsBox(width / 2, height / 2);
+
+        FixtureDef boxFixtureDef = new FixtureDef();
+        boxFixtureDef.shape = boxShape;
+        boxFixtureDef.density = 1;
+        boxFixtureDef.friction = 0.8f;
+        boxFixtureDef.restitution = 0.2f;
+
+        boxBody.createFixture(boxFixtureDef);
+
+        if (boxBody != null) {
+            bodies.add(boxBody);
+
+            Overlay overlay = ((TestScene) scene).showBoxBody(boxBody, scaleRate);
+
+            boxBody.setUserData(overlay);
+        }
+
+        return boxBody;
+    }
+
     protected World world;
 
     private boolean stop;
 
-    protected List<Body> bodies;
+    private List<Body> bodies;
+
+    private Body groundBody;
 
     private class SimulateThread extends Thread {
         float step = 1 / 60f;

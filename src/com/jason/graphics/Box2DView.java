@@ -5,7 +5,7 @@ import android.opengl.GLU;
 import ice.engine.GameView;
 import ice.engine.GlRenderer;
 import ice.graphic.projection.PerspectiveProjection;
-import ice.model.vertex.VboRect;
+import ice.model.vertex.Rect;
 
 import javax.microedition.khronos.opengles.GL11;
 
@@ -48,7 +48,7 @@ public class Box2DView extends GameView {
 
             gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-            VboRect.setSharedMode(GL_LINE_STRIP);
+            Rect.setSharedMode(GL_LINE_STRIP);
 
             gl.glEnable(GL_BLEND);
             gl.glBlendFunc(GL_ONE, GL_ONE);
