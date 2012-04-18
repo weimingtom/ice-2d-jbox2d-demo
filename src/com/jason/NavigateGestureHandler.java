@@ -77,6 +77,10 @@ public class NavigateGestureHandler extends TouchEventListener {
             @Override
             public void run() {
 
+                currentIndex--;
+                if (currentIndex < 0)
+                    currentIndex = 0;
+
                 EngineContext context = EngineContext.getInstance();
                 App app = context.getApp();
                 app.back();
