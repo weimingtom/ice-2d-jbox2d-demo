@@ -1,16 +1,16 @@
 package com.jason;
 
 import com.jason.graphics.Box2DView;
-import com.jason.scene_providers.Main;
+import com.jason.scene_providers.Demo;
 import ice.engine.Game;
 import ice.engine.GameView;
 import ice.engine.SceneProvider;
 
-public class JBox2d extends Game {
+public class Test extends Game {
 
     @Override
     protected Class<? extends SceneProvider> getEntry() {
-        return Main.class;
+        return Demo.class;
     }
 
     @Override
