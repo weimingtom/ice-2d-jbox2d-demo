@@ -9,7 +9,7 @@
 
     <application android:label="@string/app_name">
 
-        <activity android:name=".JBox2d"
+        <activity android:name=".Test"
                   android:label="@string/app_name"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"
