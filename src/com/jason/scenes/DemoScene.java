@@ -27,9 +27,7 @@ import static ice.practical.DigitSequence.STYLE_0_9_POSITIVE_NEGATIVE;
 
 public class DemoScene extends Scene {
 
-    @Override
-    protected void onCreate() {
-
+    public DemoScene() {
         textOverlayTest();
 
         simulateTest();
@@ -46,9 +44,7 @@ public class DemoScene extends Scene {
         grid.setTexture(new ETC1Texture(R.raw.hover));
         grid.addGlStatusController(BLEND_S_ONE_D_ONE);
         addChild(hoverEffect = grid);
-
     }
-
 
     private void meshTest() {
         ObjLoader objLoader = new ObjLoader();

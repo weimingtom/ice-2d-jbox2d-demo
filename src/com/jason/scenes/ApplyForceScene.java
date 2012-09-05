@@ -13,9 +13,7 @@ import static javax.microedition.khronos.opengles.GL10.GL_TRIANGLES;
  */
 public class ApplyForceScene extends TestScene {
 
-    @Override
-    protected void onCreate() {
-        super.onCreate();
+    public ApplyForceScene() {
 
         TextOverlay textOverlay = new TextOverlay(200, 20);
         textOverlay.setColor(Color.YELLOW);
@@ -27,7 +25,7 @@ public class ApplyForceScene extends TestScene {
         textOverlay.setPos(1024 / 2, 768 / 2);
 
         addChild(textOverlay);
-    }
 
+    }
 
 }
