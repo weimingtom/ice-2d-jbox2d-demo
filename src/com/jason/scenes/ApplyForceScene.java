@@ -24,7 +24,7 @@ public class ApplyForceScene extends TestScene {
         Rect vertexData = textOverlay.getVertexData();
         vertexData.setMode(GL_TRIANGLES);
 
-        textOverlay.setPos(getWidth() / 2, getHeight() / 2);
+        textOverlay.setPos(1024 / 2, 768 / 2);
 
         addChild(textOverlay);
     }

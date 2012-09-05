@@ -5,6 +5,7 @@ import com.jason.scene_providers.ApplyForce;
 import com.jason.scene_providers.Main;
 import ice.engine.App;
 import ice.engine.EngineContext;
+import ice.engine.SceneProviderManager;
 import ice.node.Overlay;
 import ice.node.TouchEventListener;
 
@@ -61,7 +62,8 @@ public class NavigateGestureHandler extends TouchEventListener {
 
                         EngineContext context = EngineContext.getInstance();
                         App app = context.getApp();
-                        app.intent(TESTS[i]);
+                        SceneProviderManager manager = app.getSceneProviderManager();
+                        manager.intent(TESTS[i]);
 
                         break;
                     }
@@ -82,8 +84,8 @@ public class NavigateGestureHandler extends TouchEventListener {
                     currentIndex = 0;
 
                 EngineContext context = EngineContext.getInstance();
-                App app = context.getApp();
-                app.back();
+                SceneProviderManager manager = context.getApp().getSceneProviderManager();
+                manager.back();
 
             }
         }.start();

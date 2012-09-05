@@ -1,7 +1,7 @@
 package com.jason.graphics;
 
-import android.content.Context;
 import android.opengl.GLU;
+import ice.engine.App;
 import ice.engine.GameView;
 import ice.engine.GlRenderer;
 import ice.graphic.projection.PerspectiveProjection;
@@ -18,8 +18,8 @@ import static javax.microedition.khronos.opengles.GL11.*;
  */
 public class Box2DView extends GameView {
 
-    public Box2DView(Context context) {
-        super(context);
+    public Box2DView(App app) {
+        super(app);
 
         setDebugFlags(DEBUG_CHECK_GL_ERROR);
     }

@@ -3,7 +3,6 @@ package com.jason.scene_providers;
 import android.util.Log;
 import com.jason.NavigateGestureHandler;
 import com.jason.scenes.TestScene;
-import ice.engine.EngineContext;
 import ice.engine.SceneProvider;
 import ice.node.Overlay;
 import org.jbox2d.collision.shapes.PolygonShape;
@@ -36,8 +35,8 @@ public abstract class Test extends SceneProvider {
 
         bodies = new CopyOnWriteArrayList<Body>();
 
-        int appWidth = EngineContext.getAppWidth();
-        int appHeight = EngineContext.getAppHeight();
+        int appWidth = 1024;
+        int appHeight = 768;
 
         aspect = (float) appWidth / appHeight;
         scaleRate = MAX_WORLD_SIZE / Math.max(appWidth, appHeight);

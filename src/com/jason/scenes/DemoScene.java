@@ -101,7 +101,7 @@ public class DemoScene extends Scene {
         simulate3D.startAnimation(rotate);
 
         simulate3D.setPos(
-                getWidth() / 2,
+                1024 / 2,
                 700
         );
 
@@ -122,8 +122,8 @@ public class DemoScene extends Scene {
         digitSequence.growTo(999, 100000);
 
         digitSequence.setPos(
-                getWidth() / 2,
-                getHeight() / 2 - 200
+                1024 / 2,
+                768 / 2 - 200
         );
 
         addChild(digitSequence);
@@ -133,8 +133,8 @@ public class DemoScene extends Scene {
         PokerOverlay pokerOverlay = new PokerOverlay();
 
         pokerOverlay.setPos(
-                getWidth() / 2,
-                getHeight() / 2
+                1024 / 2,
+                768 / 2
         );
 
         AnimationGroup group = new AnimationGroup();
@@ -164,7 +164,7 @@ public class DemoScene extends Scene {
         TestParticleSystem particleSystem = new TestParticleSystem(50, R.drawable.star);
         particleSystem.addGlStatusController(new DepthController(false));
 
-        particleSystem.setPos(700, getHeight() / 2);
+        particleSystem.setPos(700, 1024 / 2);
 
         RotateAnimation rotateAnimation = new RotateAnimation(30000, 720);
         rotateAnimation.setRotateVector(1, 1, 1);
@@ -181,7 +181,7 @@ public class DemoScene extends Scene {
         TextOverlay textOverlay = new TextOverlay(200, 40);
 
         textOverlay.setPos(
-                getWidth() / 2,
+                768 / 2,
                 650
         );
         textOverlay.setColor(Color.YELLOW);
