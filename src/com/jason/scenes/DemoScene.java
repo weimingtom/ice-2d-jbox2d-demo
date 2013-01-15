@@ -11,7 +11,9 @@ import ice.graphic.gl_status.DepthController;
 import ice.graphic.texture.BitmapTexture;
 import ice.graphic.texture.ETC1Texture;
 import ice.graphic.texture.Texture;
+import ice.model.vertex.Grid;
 import ice.model.vertex.VertexBufferObject;
+import ice.model.vertex.VertexData;
 import ice.node.Overlay;
 import ice.node.widget.BaseOverlay;
 import ice.node.widget.RectOverlay;
@@ -38,12 +40,27 @@ public class DemoScene extends Scene {
 
         meshTest();
 
+        gridMeshTest();
+
         particleSystemTest();
 
         RectOverlay rectOverlay = new RectOverlay(100, 100);
         rectOverlay.setTexture(new ETC1Texture(R.raw.hover));
         rectOverlay.addGlStatusController(BLEND_S_ONE_D_ONE);
         addChild(hoverEffect = rectOverlay);
+    }
+
+    private void gridMeshTest() {
+        VertexData grid = new Grid(100, 100, 2, 2);
+
+        BaseOverlay<VertexData> baseOverlay = new BaseOverlay<VertexData>(
+                grid,
+                null
+        );
+
+        baseOverlay.setPos(300, 100);
+
+        addChild(baseOverlay);
     }
 
     private void meshTest() {
