@@ -13,8 +13,8 @@ import ice.graphic.texture.ETC1Texture;
 import ice.graphic.texture.Texture;
 import ice.model.vertex.VertexBufferObject;
 import ice.node.Overlay;
-import ice.node.widget.Grid;
-import ice.node.widget.Mesh;
+import ice.node.widget.BaseOverlay;
+import ice.node.widget.RectOverlay;
 import ice.node.widget.Simulate3D;
 import ice.node.widget.TextOverlay;
 import ice.practical.DigitSequence;
@@ -40,10 +40,10 @@ public class DemoScene extends Scene {
 
         particleSystemTest();
 
-        Grid grid = new Grid(100, 100);
-        grid.setTexture(new ETC1Texture(R.raw.hover));
-        grid.addGlStatusController(BLEND_S_ONE_D_ONE);
-        addChild(hoverEffect = grid);
+        RectOverlay rectOverlay = new RectOverlay(100, 100);
+        rectOverlay.setTexture(new ETC1Texture(R.raw.hover));
+        rectOverlay.addGlStatusController(BLEND_S_ONE_D_ONE);
+        addChild(hoverEffect = rectOverlay);
     }
 
     private void meshTest() {
@@ -67,25 +67,25 @@ public class DemoScene extends Scene {
                 Texture.Params.LINEAR_REPEAT
         );
 
-        Mesh<VertexBufferObject> mesh = new Mesh<VertexBufferObject>(
+        BaseOverlay<VertexBufferObject> baseOverlay = new BaseOverlay<VertexBufferObject>(
                 vertexBufferObject,
                 texture
         );
 
-        mesh.setPos(200, 200, 50);
-        mesh.setRotate(-90, 1, 0, 0);
+        baseOverlay.setPos(200, 200, 50);
+        baseOverlay.setRotate(-90, 1, 0, 0);
 
-        mesh.addGlStatusController(new DepthController(true));
-        //mesh.setColors(new float[]{1, 0, 0, 1});
+        baseOverlay.addGlStatusController(new DepthController(true));
+        //baseOverlay.setColors(new float[]{1, 0, 0, 1});
 
         RotateAnimation rotateAnim = new RotateAnimation(9000, 360);
         rotateAnim.setInterpolator(new LinearInterpolator());
         rotateAnim.setRotateVector(0, 0, 1);
         rotateAnim.setLoopTimes(Animation.FOREVER);
 
-        mesh.startAnimation(rotateAnim);
+        baseOverlay.startAnimation(rotateAnim);
 
-        addChild(mesh);
+        addChild(baseOverlay);
     }
 
     private void simulateTest() {

@@ -6,7 +6,7 @@ import com.jason.scenes.ApplyForceScene;
 import ice.engine.Scene;
 import ice.node.Overlay;
 import ice.node.TouchEventListener;
-import ice.node.widget.Grid;
+import ice.node.widget.RectOverlay;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -35,8 +35,8 @@ public class ApplyForce extends Test {
                 1
         );
 
-        Grid grid = (Grid) forceBox.getUserData();
-        grid.addEventListener(new ApplyFocreListener());
+        RectOverlay rectOverlay = (RectOverlay) forceBox.getUserData();
+        rectOverlay.addEventListener(new ApplyFocreListener());
 
     }
 

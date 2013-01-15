@@ -5,7 +5,7 @@ import ice.graphic.texture.BitmapTexture;
 import ice.node.Overlay;
 import ice.node.OverlayParent;
 import ice.node.widget.BitmapOverlay;
-import ice.node.widget.Grid;
+import ice.node.widget.RectOverlay;
 
 public class PokerOverlay extends OverlayParent<Overlay> {
 
@@ -13,7 +13,7 @@ public class PokerOverlay extends OverlayParent<Overlay> {
 
         front = new BitmapOverlay(R.drawable.pai_a2);
 
-        back = new Grid(front.getWidth(), front.getHeight(), false);
+        back = new RectOverlay(front.getWidth(), front.getHeight(), false);
 
         back.setTexture(
                 new BitmapTexture(R.drawable.poker_back)
@@ -22,6 +22,6 @@ public class PokerOverlay extends OverlayParent<Overlay> {
         addChildren(back, front);
     }
 
-    private Grid front;
-    private Grid back;
+    private RectOverlay front;
+    private RectOverlay back;
 }

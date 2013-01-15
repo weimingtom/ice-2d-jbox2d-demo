@@ -1,6 +1,5 @@
 package com.jason.graphics;
 
-import android.opengl.GLU;
 import ice.engine.App;
 import ice.engine.GameView;
 import ice.engine.GlRenderer;
@@ -33,7 +32,7 @@ public class Box2DView extends GameView {
 
         public Box2DRenderer() {
             super(
-                    new PerspectiveProjection(new GLU(), 45)
+                    new PerspectiveProjection(45)
             );
         }
 

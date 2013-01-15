@@ -2,7 +2,7 @@ package com.jason.scenes;
 
 import android.graphics.Color;
 import ice.engine.Scene;
-import ice.node.widget.Grid;
+import ice.node.widget.RectOverlay;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -14,14 +14,14 @@ import org.jbox2d.dynamics.Body;
  */
 public class TestScene extends Scene {
 
-    public Grid showBoxBody(Body body, float scaleRate) {
+    public RectOverlay showBoxBody(Body body, float scaleRate) {
 
         PolygonShape box = (PolygonShape) body.m_fixtureList.getShape();
 
         Vec2 vertex = box.getVertex(0);
         Vec2 pos = body.getPosition();
 
-        Grid boxOverlay = new Grid(
+        RectOverlay boxOverlay = new RectOverlay(
                 Math.abs(vertex.x) * 2 / scaleRate,
                 Math.abs(vertex.y) * 2 / scaleRate
         );
