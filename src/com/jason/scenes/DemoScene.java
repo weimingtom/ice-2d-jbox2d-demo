@@ -51,11 +51,11 @@ public class DemoScene extends Scene {
     }
 
     private void gridMeshTest() {
-        VertexData grid = new Grid(100, 100, 2, 2);
+        VertexData grid = new Grid(100, 100, 2, 2, true);
 
         BaseOverlay<VertexData> baseOverlay = new BaseOverlay<VertexData>(
                 grid,
-                null
+                new BitmapTexture(R.drawable.image2)
         );
 
         baseOverlay.setPos(300, 100);
