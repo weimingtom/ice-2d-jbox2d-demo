@@ -51,7 +51,7 @@ public class DemoScene extends Scene {
     }
 
     private void gridMeshTest() {
-        VertexData grid = new Grid(100, 100, 2, 2, true);
+        VertexData grid = new Grid(100, 100, 2, 2);
 
         BaseOverlay<VertexData> baseOverlay = new BaseOverlay<VertexData>(
                 grid,

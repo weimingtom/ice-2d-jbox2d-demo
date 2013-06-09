@@ -5,9 +5,12 @@ import ice.engine.GameView;
 import ice.engine.GlRenderer;
 import ice.graphic.projection.PerspectiveProjection;
 
-import javax.microedition.khronos.opengles.GL11;
-
-import static javax.microedition.khronos.opengles.GL11.*;
+import static android.opengl.GLES10.*;
+import static javax.microedition.khronos.opengles.GL11.GL_CULL_FACE;
+import static javax.microedition.khronos.opengles.GL11.GL_LIGHTING;
+import static javax.microedition.khronos.opengles.GL11.GL_LINE_SMOOTH;
+import static javax.microedition.khronos.opengles.GL11.GL_NICEST;
+import static javax.microedition.khronos.opengles.GL11.GL_PERSPECTIVE_CORRECTION_HINT;
 
 /**
  * User: jason
@@ -37,14 +40,14 @@ public class Box2DView extends GameView {
         }
 
         @Override
-        protected void onInit(GL11 gl) {
-            gl.glEnable(GL_CULL_FACE);
+        protected void onInit() {
+            glEnable(GL_CULL_FACE);
 
-            gl.glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHTING);
 
-            gl.glEnable(GL_LINE_SMOOTH);
+            glEnable(GL_LINE_SMOOTH);
 
-            gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
             //Rect.setSharedMode(GL_LINE_STRIP);
 
